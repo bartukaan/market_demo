@@ -48,7 +48,6 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
     _currentList = allData;
     _sortBaseQuoteTypeAsc;
     _tabControllerListener;
-    _checkPriority();
   }
 
   void get _tabControllerListener =>
@@ -198,32 +197,6 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
             ],
           ))
       .toList();
-
-  _checkPriority() {
-    var tmpBTCList = [];
-    var tmpETHList = [];
-    var tmpWOOList = [];
-
-    for(var i=0; i<_currentList!.length; i++){
-      switch(_currentList![i].base) {
-        case AppConstantStrings.btc:
-          tmpBTCList.add(_currentList![i]);
-          _currentList!.removeAt(i);
-          break;
-        case AppConstantStrings.eth:
-          tmpETHList.add(_currentList![i]);
-          _currentList!.removeAt(i);
-          break;
-        case AppConstantStrings.woo:
-          tmpWOOList.add(_currentList![i]);
-          _currentList!.removeAt(i);
-          break;
-        default:
-      }
-    }
-    _currentList = [...tmpBTCList, ...tmpETHList,...tmpWOOList, ..._currentList!];
-    }
-
 
   void get _sortPriceAsc => _currentList!.sort(
         (a, b) => b.lastPrice.compareTo(a.lastPrice),
